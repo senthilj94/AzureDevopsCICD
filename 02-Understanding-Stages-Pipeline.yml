@@ -16,30 +16,33 @@ stages:
     steps:
     - bash: echo build FirstJob
     - bash: echo $(PipelineLevelVariable)
-  - job: SecondJob
-    steps:
-    - bash: echo build FirstJob
-- stage: DevDeploy
-  variables:
-    environment: Dev
-  dependsOn: Build
-  jobs:
-    - job: FirstJob
-      steps:
-      - bash: echo $(environment)Deploy FirstJob
-- stage: Test
-  variables:
-      environment: Test
-  dependsOn: Build
-  jobs:
-    - job: FirstJob
-      steps:
-      - bash: echo $(environment) FirstJob
-- stage: Prod
-  dependsOn: 
-  - DevDeploy
-  - Test
-  jobs:
-  - job: FirstJob
-    steps:
-    - bash: echo Prod FirstJob
+    - bash: echo $(Build.BuildNumer)
+    - bash: echo $(Build.BuildId)
+    - bash: echo $(Build.SourceBranchName)
+#   - job: SecondJob
+#     steps:
+#     - bash: echo build FirstJob
+# - stage: DevDeploy
+#   variables:
+#     environment: Dev
+#   dependsOn: Build
+#   jobs:
+#     - job: FirstJob
+#       steps:
+#       - bash: echo $(environment)Deploy FirstJob
+# - stage: Test
+#   variables:
+#       environment: Test
+#   dependsOn: Build
+#   jobs:
+#     - job: FirstJob
+#       steps:
+#       - bash: echo $(environment) FirstJob
+# - stage: Prod
+#   dependsOn: 
+#   - DevDeploy
+#   - Test
+#   jobs:
+#   - job: FirstJob
+#     steps:
+#     - bash: echo Prod FirstJob
